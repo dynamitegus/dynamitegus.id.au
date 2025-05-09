@@ -1,18 +1,48 @@
 ---
-import './src/styles/global.css';
-import ButtonLink from "@/components/ui/ButtonLink.astro"
+import "./src/styles/global.css";
+import ButtonLink from "@/components/ui/ButtonLink.astro";
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
+
 ---
 
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-		<ButtonLink href="https://dynamitegus.au">goon</ButtonLink>
-	</body>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Astro</title>
+  </head>
+  <body class="bg-black text-white sm:mx-5 md:mx-20 lg:mx-40 xl:mx-70 2xl:mx-90 my-0 px-4 bg-center h-screen">
+    <div class="">
+      <ButtonLink href="https://dynamitegus.au">goon</ButtonLink>
+	  <Table>
+		<TableCaption>A list of your recent invoices.</TableCaption>
+		<TableHeader>
+		  <TableRow>
+			<TableHead className="w-[100px]">Invoice</TableHead>
+			<TableHead>Status</TableHead>
+			<TableHead>Method</TableHead>
+			<TableHead className="text-right">Amount</TableHead>
+		  </TableRow>
+		</TableHeader>
+		<TableBody>
+		  <TableRow>
+			<TableCell className="font-medium">INV001</TableCell>
+			<TableCell>Paid</TableCell>
+			<TableCell>Credit Card</TableCell>
+			<TableCell className="text-right">$250.00</TableCell>
+		  </TableRow>
+		</TableBody>
+	  </Table>
+    </div>
+  </body>
 </html>
