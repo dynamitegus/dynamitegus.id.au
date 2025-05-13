@@ -10,51 +10,56 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table"
-const invoices = [
+} from "@/components/ui/table";
+import { AvatarAstro } from "@/components/ui/AvatarAstro"
+import { ExternalLink } from 'lucide-react';
+const socials = [
   {
-    invoice: "INV001",
-    paymentStatus: "Paid",
-    totalAmount: "$250.00",
-    paymentMethod: "Credit Card",
+    social: "Website",
+    handle: "dynamitegus.au",
+    icon: {
+		src: "/globe.svg",
+		alt: "A Smiley Face",
+		fallbackText: "www"
+	},
+    avatar: {
+		src: "https://dynamitegus.au/favicon.svg",
+		alt: "A Smiley Face",
+		fallbackText: ":>"
+	},
+    url: "https://dynamitegus.au/",
   },
   {
-    invoice: "INV002",
-    paymentStatus: "Pending",
-    totalAmount: "$150.00",
-    paymentMethod: "PayPal",
+    social: "Github",
+    handle: "dynamitegus",
+    icon: {
+		src: "/globe.svg",
+		alt: "A Smiley Face",
+		fallbackText: "GH"
+	},
+    avatar: {
+		src: "https://dynamitegus.au/favicon.svg",
+		alt: "A Smiley Face",
+		fallbackText: ":>"
+	},
+    url: "https://github.com/dynamitegus/",
   },
   {
-    invoice: "INV003",
-    paymentStatus: "Unpaid",
-    totalAmount: "$350.00",
-    paymentMethod: "Bank Transfer",
+    social: "Mastodon",
+    handle: "@dynamitegus@mastodon.social",
+    icon: {
+		src: "/globe.svg",
+		alt: "A Smiley Face",
+		fallbackText: "GH"
+	},
+    avatar: {
+		src: "https://dynamitegus.au/favicon.svg",
+		alt: "A Smiley Face",
+		fallbackText: ":>"
+	},
+    url: "https://mastodon.social/@dynamitegus",
   },
-  {
-    invoice: "INV004",
-    paymentStatus: "Paid",
-    totalAmount: "$450.00",
-    paymentMethod: "Credit Card",
-  },
-  {
-    invoice: "INV005",
-    paymentStatus: "Paid",
-    totalAmount: "$550.00",
-    paymentMethod: "PayPal",
-  },
-  {
-    invoice: "INV006",
-    paymentStatus: "Pending",
-    totalAmount: "$200.00",
-    paymentMethod: "Bank Transfer",
-  },
-  {
-    invoice: "INV007",
-    paymentStatus: "Unpaid",
-    totalAmount: "$300.00",
-    paymentMethod: "Credit Card",
-  },
-]
+];
 ---
 
 <html lang="en">
@@ -65,36 +70,29 @@ const invoices = [
     <meta name="generator" content={Astro.generator} />
     <title>Astro</title>
   </head>
-  <body class="bg-black text-white sm:mx-5 md:mx-20 lg:mx-40 xl:mx-70 2xl:mx-90 my-0 px-4 bg-center h-screen">
+  <body
+    class="bg-black text-white sm:mx-5 md:mx-20 lg:mx-40 xl:mx-70 2xl:mx-90 my-0 px-4 bg-center h-screen">
     <div class="">
-      <ButtonLink href="https://dynamitegus.au">goon</ButtonLink>
-	  <Table>
-		<TableCaption>A list of social links.</TableCaption>
-		<TableHeader>
-		  <TableRow>
-			<TableHead className="w-[100px]">Invoice</TableHead>
-			<TableHead>Status</TableHead>
-			<TableHead>Method</TableHead>
-			<TableHead className="text-right">Amount</TableHead>
-		  </TableRow>
-		</TableHeader>
-		<TableBody>
-		  {invoices.map((invoice) => (
-			<TableRow key={invoice.invoice}>
-			  <TableCell className="font-medium">{invoice.invoice}</TableCell>
-			  <TableCell>{invoice.paymentStatus}</TableCell>
-			  <TableCell>{invoice.paymentMethod}</TableCell>
-			  <TableCell className="text-right">{invoice.totalAmount}</TableCell>
-			</TableRow>
-		  ))}
-		</TableBody>
-		<TableFooter>
-		  <TableRow>
-			<TableCell colSpan={3}>Total</TableCell>
-			<TableCell className="text-right">$2,500.00</TableCell>
-		  </TableRow>
-		</TableFooter>
-	  </Table>
+      <Table>
+        <TableCaption>A list of social links.</TableCaption>
+        <TableBody>
+          {
+            socials.map((social) => (
+              <TableRow key={social.social}>
+                <TableCell className="font-medium">
+				  <AvatarAstro client:load src={social.icon.src} alt={social.icon.alt} fallbackText={social.icon.fallbackText}/>
+                </TableCell>
+				<TableCell>
+					<AvatarAstro client:load src={social.avatar.src} alt={social.avatar.alt} fallbackText={social.avatar.fallbackText}/>
+				</TableCell>
+                <TableCell>{social.handle}</TableCell>
+                <TableCell className="text-right"><ButtonLink href={social.url}><ExternalLink /></ButtonLink></TableCell>
+              </TableRow>
+
+            ))
+          }
+        </TableBody>
+      </Table>
     </div>
   </body>
 </html>
